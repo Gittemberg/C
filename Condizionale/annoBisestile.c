@@ -2,9 +2,15 @@
 int main()
 {
     int a, m, c;
-    printf("inserisci l'anno\n");
+    printf("inserisci l'anno e il mese\n");
+etichetta:
     scanf("%d%d", &a, &m);
+    if (m > 12 || m < 1)
+    {
+        printf("errore mese, reinserire anno e mese\n");
 
+        goto etichetta;
+    }
     if (m == 2)
         if ((a % 4 == 0 && a % 100 != 0) || a % 400 == 0)
         {
@@ -12,7 +18,6 @@ int main()
             printf("29 giorni");
         }
         else
-
         {
             printf("non è bisestile\n");
             printf("28 giorni");
