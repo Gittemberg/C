@@ -26,10 +26,12 @@ etichetta:
     if (g > giorni_mese)
     {
         g = 1;
-        m = m + 1;
+        m++;
         if (m > 12)
+        {
             a = a + 1;
-        m = 1;
+            m = 1;
+        }
     }
     printf("%d, %d %d", g, m, a);
 }
