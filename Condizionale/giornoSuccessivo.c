@@ -5,7 +5,6 @@ int main()
     printf("inserisci giorno mese e anno\n");
 etichetta:
     scanf("%d%d%d", &g, &m, &a);
-    g = g + 1;
     if (m > 12 || m < 1)
     {
         printf("errore mese, reinserire anno e mese\n");
@@ -22,8 +21,16 @@ etichetta:
 
     else if (m == 4 || m == 6 || m == 9 || m == 11)
         giorni_mese = 30;
+    else
+        giorni_mese = 31;
 
-    if (g > giorni_mese)
+    if (g > giorni_mese || g < 1)
+    {
+        printf("errore giorno, reinserire data\n");
+        goto etichetta;
+    }
+    g++;
+    if (g++ > giorni_mese)
     {
         g = 1;
         m++;
@@ -33,5 +40,5 @@ etichetta:
             m = 1;
         }
     }
-    printf("%d, %d %d", g, m, a);
+    printf("%d/%d/%d\n", g, m, a);
 }
