@@ -29,8 +29,9 @@ etichetta:
         printf("errore giorno, reinserire data\n");
         goto etichetta;
     }
-    g++;
-    if (g++ > giorni_mese)
+    if (g + 1 < giorni_mese)
+        g++;
+    else
     {
         g = 1;
         m++;
