@@ -4,7 +4,7 @@ int primo(int c)
 {
     for (int i = 1; i < c; i++)
     {
-        if (c % i == 0 && i != 1 && c != i)
+        if (c % i == 0 && i != 1)
         {
             return 0;
         }
