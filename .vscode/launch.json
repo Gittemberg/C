@@ -5,10 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Attach",
+            "name": "(gdb) Launch",
             "type": "cppdbg",
-            "request": "attach",
-            "program": "${workspaceFolder}/Parziale/a.out",
+            "request": "launch",
+            "program": "${workspaceFolder}/Struct/progr",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
                 {
@@ -22,6 +27,6 @@
                     "ignoreFailures": true
                 }
             ]
-        }
+        },
     ]
 }
