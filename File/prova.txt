@@ -1,0 +1,4 @@
+parole
+soltanto
+parole
+FINE

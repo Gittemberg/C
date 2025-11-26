@@ -1,8 +1,13 @@
 #include <stdio.h>
-#include "header.h"
+#include "headerFigura.h"
 
 int main()
 {
-    printf("%d\n", somma(2, 3));
-    printf("%d\n", differenza(2, 3));
+    Figura f;
+    f = quadrato(2.5);
+
+    printf("%f\n", area(f));
+    printf("%f\n", perimetro(f));
+
+    f = rettangolo(3.4, 4.2);
 }
