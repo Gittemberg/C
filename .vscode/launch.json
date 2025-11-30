@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Struct/progr",
+            "program": "${workspaceFolder}/Esame/fatture",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
