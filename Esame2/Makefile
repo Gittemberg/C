@@ -1,8 +1,8 @@
-vaccinazioni: main.o listaCani.o
-	gcc -g -o vaccinazioni main.o listaCani.o
+vaccinazioni: main.o vaccini.o
+	gcc -g -o vaccinazioni main.o vaccini.o
 
-main.o: main.c listaCani.h
-	gcc -c -g main.c
-
-listaCani.o: listaCani.c listaCani.h
-	gcc -c -g listaCani.c
+main.o: main.c vaccini.h
+	gcc -g -c main.c
+	
+vaccini.o: vaccini.c vaccini.h
+	gcc -g -c vaccini.c
