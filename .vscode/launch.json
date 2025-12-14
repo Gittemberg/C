@@ -8,12 +8,12 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Esame2/vaccinazioni",
+            "program": "${workspaceFolder}/Esame3/fatture",
             "args": [
-                "vaccini.dat"
+                "accessi.dat"
             ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/Esame2",
+            "cwd": "${workspaceFolder}/Esame3",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",

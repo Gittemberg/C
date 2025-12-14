@@ -33,11 +33,6 @@ int main(int argc, char *argv[])
     }
     stampa(l);
 
-    while (l != NULL)
-    {
-        inserimentoOrdinato(&lOrd, l->dato);
-        l = l->next;
-    }
     printf("\nlista ordinata \n");
     stampa(lOrd);
 
@@ -57,4 +52,5 @@ int main(int argc, char *argv[])
     {
         printf("errore chiusura file");
     }
+    return 0;
 }
