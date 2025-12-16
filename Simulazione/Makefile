@@ -1,6 +1,6 @@
-medie: medie.o main.o
+medie: listaStudenti.o main.o
 	gcc -o medie -g main.o medie.o
-medie.o: medie.c medie.h
-	gcc -g -c medie.c
-main.o: main.c medie.h
+listaStudenti.o: listaStudenti.c listaStudenti.h
+	gcc -g -c listaStudenti.c
+main.o: main.c listaStudenti.h
 	gcc -g -c main.c
