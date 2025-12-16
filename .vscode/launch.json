@@ -8,12 +8,12 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Esame3/fatture",
+            "program": "${workspaceFolder}/Simulazione/medie",
             "args": [
-                "accessi.dat"
+                "esami.dat"
             ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/Esame3",
+            "cwd": "${workspaceFolder}/Simulazione",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
