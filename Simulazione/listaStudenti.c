@@ -79,5 +79,3 @@ void inserimentoOrdinato(Lista *pl, Dato d)
     pl = ricerca(pl, d);
     insTesta(pl, d);
 }
-
-// posso sostituire inserimentoOrdinato a insTesta in inserimento per non dover utilizzare due liste separate
