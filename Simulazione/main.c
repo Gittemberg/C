@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
         exit(3);
     }
     ordina(l, &lOrd);
-    printf("\ninserimento ordinato\n");
     stampa(lOrd);
 
     return 0;
