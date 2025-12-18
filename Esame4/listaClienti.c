@@ -3,6 +3,8 @@
 #include "listaClienti.h"
 #include <string.h>
 
+char *mesi[] = {"Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"};
+
 void nuovaLista(Lista *pl)
 {
 
@@ -40,18 +42,18 @@ void inserimento(Lista *pl, Record r)
     if (*pl != NULL && !strcmp((*pl)->dato.fiscale, r.fiscale))
     {
         (*pl)->dato.totale += r.importo;
-        (*pl)->dato.mensili[r.mese] += r.importo;
+        (*pl)->dato.mensili[r.mese - 1] += r.importo;
     }
     else
     {
         Dato d;
         strcpy(d.fiscale, r.fiscale);
         d.totale = r.importo;
-        d.mensili[r.mese] = r.importo;
+        d.mensili[r.mese - 1] = r.importo;
         int i;
-        for (i = 1; i < 12; i++)
+        for (i = 0; i < 12; i++)
         {
-            if (i != r.mese)
+            if (i != r.mese - 1)
                 d.mensili[i] = 0.0;
         }
 
@@ -90,11 +92,11 @@ void stampa(Lista l)
     {
         printf("%s: %.02f", l->dato.fiscale, l->dato.totale);
         int i;
-        for (i = 1; i < 12; i++)
+        for (i = 0; i < 12; i++)
         {
             if (l->dato.mensili[i] != 0)
             {
-                printf(" mensili mese %d: %.02f", i, l->dato.mensili[i]);
+                printf(" %s: %.02f", mesi[i], l->dato.mensili[i]);
             }
         }
         printf("\n");
