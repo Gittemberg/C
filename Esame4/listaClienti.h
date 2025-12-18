@@ -1,17 +1,17 @@
 typedef struct
 {
-    int matricola;
-    char esame[40];
+    char fiscale[17];
     int giorno;
     int mese;
     int anno;
-    int voto;
+    float importo;
 } Record;
+
 typedef struct
 {
-    int matricola;
-    int n_esami;
-    int somma_voto;
+    char fiscale[17];
+    float totale;
+    float mensili[12];
 } Dato;
 
 typedef struct nodo

@@ -11,6 +11,11 @@ void nuovaLista(Lista *pl)
 void insTesta(Lista *pl, Dato d)
 {
     Nodo *aux = malloc(sizeof(Nodo));
+    if (aux == NULL)
+    {
+        printf("Errore allocazione memoria\n");
+        exit(100);
+    }
     aux->dato = d;
     aux->next = *pl;
     *pl = aux;
@@ -78,4 +83,13 @@ void inserimentoOrdinato(Lista *pl, Dato d)
 
     pl = ricerca(pl, d);
     insTesta(pl, d);
+}
+
+void ordina(Lista pl, Lista *l2)
+{
+    while (pl != NULL)
+    {
+        inserimentoOrdinato(l2, pl->dato);
+        pl = pl->next;
+    }
 }

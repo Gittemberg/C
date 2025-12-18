@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "listaClienti.h"
 #include <string.h>
-#include "listaStudenti.h"
+
 int main(int argc, char *argv[])
 {
-
-    FILE *pf;
     Record r;
+    FILE *pf;
     Lista l;
     Lista lOrd;
 
@@ -18,24 +18,25 @@ int main(int argc, char *argv[])
         printf("uso %s [nome_file]\n", argv[0]);
         exit(1);
     }
-
-    pf = fopen(argv[1], "rb");
+    pf = fopen(argv[1], "rt");
 
     if (pf == NULL)
     {
-        printf("Errore lettura file\n");
+        printf("Errore apertura file\n");
         exit(2);
     }
-    while (fread(&r, sizeof(Record), 1, pf) == 1)
+    while (fscanf(pf, "%s %d %d %d %f", r.fiscale, &r.giorno, &r.mese, &r.anno, &r.importo) == 5)
+    {
         inserimento(&l, r);
+    }
+
     if (fclose(pf) != 0)
     {
         printf("Errore chiusura file\n");
         exit(3);
     }
-    ordina(l, &lOrd);
-    printf("\ninserimento ordinato\n");
-    stampa(lOrd);
 
+    ordina(l, &lOrd);
+    stampa(lOrd);
     return 0;
 }

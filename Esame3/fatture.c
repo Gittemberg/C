@@ -11,6 +11,11 @@ void insTesta(Lista *pl, Dato d)
 {
 
     Nodo *aux = malloc(sizeof(Nodo));
+    if (aux == NULL)
+    {
+        printf("Errore allocazione memoria\n");
+        exit(100);
+    }
     aux->dato = d;
     aux->next = *pl;
     *pl = aux;
