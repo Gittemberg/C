@@ -8,12 +8,10 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Esame4/riepilogo",
-            "args": [
-                "fatture.txt"
-            ],
+            "program": "${workspaceFolder}/Teoria/a.out",
+            "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/Esame4",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
