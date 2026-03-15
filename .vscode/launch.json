@@ -8,10 +8,12 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Teoria/a.out",
-            "args": [],
+            "program": "${workspaceFolder}/Espansione/espansione",
+            "args": [
+                "tabella.txt"
+            ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/Espansione",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
