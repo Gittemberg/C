@@ -36,7 +36,11 @@ int main(int argc, char *argv[])
     }
 
     fclose(pf);
-
+    if (lista.count == 0)
+    {
+        printf("Nessun mintermine con valore 1 nella tabella di verita'\n");
+        return 0;
+    }
     // Stampa quello che è stato letto
     printf("Mintermini letti dal file:\n");
     for (int i = 0; i < lista.count; i++)
