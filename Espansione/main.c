@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
 
     ListaMinterm lista;
     nuovaLista(&lista);
+    ListaMinterm lista2;
+    nuovaLista(&lista2);
 
     char bitStr[MAX_BITS + 2]; // 4 bit + spazio + '\0'
     int flag;
@@ -49,6 +51,11 @@ int main(int argc, char *argv[])
        printf("Risultato test:\n");
 
        printf("%s\n", risultato); */
-
+    confrontaArray(&lista, &lista2);
+    printf("stampa lista 2\n");
+    for (int i = 0; i < lista2.count; i++)
+    {
+        printf("%s\n", lista2.minterms[i]);
+    }
     return 0;
 }

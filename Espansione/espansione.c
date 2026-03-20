@@ -29,7 +29,7 @@ char *confrontaMintermine(char *minterm1, char *minterm2)
     j = 0;
 
     length = strlen(minterm1);
-    char *s = malloc(50);
+    char *s = malloc(length + 1);
     for (i = 0; i < length; i++)
     {
         if (!(minterm1[i] == minterm2[i]))
@@ -39,7 +39,7 @@ char *confrontaMintermine(char *minterm1, char *minterm2)
         }
         if (counter >= 2)
         {
-            strcpy(s, "non espandibili");
+            strcpy(s, "no");
             return s;
         }
     }
@@ -52,7 +52,57 @@ char *confrontaMintermine(char *minterm1, char *minterm2)
     }
     else
     {
-        strcpy(s, "non espandibili");
+        strcpy(s, "no");
         return s;
+    }
+}
+
+void confrontaArray(ListaMinterm *arrayOriginale, ListaMinterm *arrayNuovo)
+{
+
+    int i, j, k, flag, c;
+
+    if (strcmp("no", confrontaMintermine(arrayOriginale->minterms[0], arrayOriginale->minterms[1])))
+    {
+        strcpy(arrayNuovo->minterms[0], confrontaMintermine(arrayOriginale->minterms[0], arrayOriginale->minterms[1]));
+        arrayNuovo->count = 1;
+        c = 1;
+    }
+    else
+    {
+        strcpy(arrayNuovo->minterms[0], arrayOriginale->minterms[0]);
+        strcpy(arrayNuovo->minterms[1], arrayOriginale->minterms[1]);
+        arrayNuovo->count = 2;
+        c = 2;
+    }
+    for (i = 0; i < arrayOriginale->count - c; i++)
+    {
+
+        for (j = 0; j < arrayNuovo->count; j++)
+
+        {
+
+            if (strcmp("no", confrontaMintermine(arrayNuovo->minterms[j], arrayOriginale->minterms[i + c])))
+            {
+                strcpy(arrayNuovo->minterms[j], confrontaMintermine(arrayNuovo->minterms[j], arrayOriginale->minterms[i + c]));
+            }
+            else
+            {
+
+                for (k = 0; k < arrayNuovo->count; k++)
+                {
+                    flag = 0;
+                    if (!strcmp(arrayOriginale->minterms[i + c], arrayNuovo->minterms[k]))
+                    {
+                        flag = 1;
+                    }
+                }
+                if (flag == 0)
+                {
+                    strcpy(arrayNuovo->minterms[arrayNuovo->count], arrayOriginale->minterms[i + c]);
+                    arrayNuovo->count++;
+                }
+            }
+        }
     }
 }
