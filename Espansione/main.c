@@ -47,14 +47,15 @@ int main(int argc, char *argv[])
     {
         printf("%s\n", lista.minterms[i]);
     }
-    /*    char *test1 = "1001";
-       char *test2 = "1001";
-       char *risultato = malloc(50);
+    /*   char *test1 = "1111";
+      char *test2 = "1-00";
+      char *risultato = malloc(50);
 
-       strcpy(risultato, confrontaMintermine(test1, test2));
-       printf("Risultato test:\n");
+      strcpy(risultato, confrontaMintermine(test1, test2));
+      printf("Risultato test:\n");
 
-       printf("%s\n", risultato); */
+      printf("%s\n", risultato); */
+
     confrontaArray(&lista, &lista2);
     printf("stampa lista 2\n");
     for (int i = 0; i < lista2.count; i++)
