@@ -33,29 +33,26 @@ char *confrontaMintermine(char *minterm1, char *minterm2)
     strcpy(s, minterm1);
     for (i = 0; i < length; i++)
     {
-        if (!(minterm1[i] == minterm2[i]))
-        {
-            if (!(minterm2[i] == '-' || minterm1[i] == '-'))
-            {
-                counter++;
-                j = i;
-            }
-            else if (minterm2[i] == '-')
-            {
 
-                s[i] = '-';
-            }
-        }
-        if (counter >= 2)
+        if (minterm2[i] != '-' && minterm1[i] != '-' && minterm1[i] != minterm2[i])
         {
-            strcpy(s, "no");
-            return s;
+            counter++;
+            j = i;
+        }
+        else if (minterm2[i] == '-')
+        {
+
+            s[i] = '-';
         }
     }
     if (counter == 1)
     {
 
         s[j] = '-';
+        return s;
+    }
+    if (counter == 0)
+    {
         return s;
     }
     else
@@ -94,59 +91,56 @@ void confrontaArray(ListaMinterm *arrayOriginale, ListaMinterm *arrayNuovo)
     char *confrontoCiclo2;
 
     k = 0;
-    flag = 0;
-    for (i = 0; i < arrayOriginale->count - c; i++)
+
+    for (i = 2; i < arrayOriginale->count; i++)
     {
+
         for (j = 0; j < arrayNuovo->count; j++)
 
         {
-            confrontoCiclo = confrontaMintermine(arrayNuovo->minterms[j], arrayOriginale->minterms[i + c]);
-            if (strcmp("no", confrontoCiclo))
+            confrontoCiclo = confrontaMintermine(arrayNuovo->minterms[j], arrayOriginale->minterms[i]);
+
+            for (k = 0; k < arrayNuovo->count; k++)
             {
-                for (k = 0; k < arrayNuovo->count; k++)
-                {
 
-                    confrontoCiclo2 = confrontaMintermine(arrayNuovo->minterms[j], arrayNuovo->minterms[k]);
-                    if (!strcmp("no", confrontoCiclo))
-                    {
-                        flag = 1;
-                        break;
-                    }
-                }
-                if (flag == 0)
-                {
+                flag = 0;
 
-                    strcpy(arrayNuovo->minterms[j], confrontoCiclo);
-                    free(confrontoCiclo);
+                confrontoCiclo2 = confrontaMintermine(arrayNuovo->minterms[j], arrayNuovo->minterms[k]);
+                if (!strcmp("no", confrontoCiclo2))
+                {
+                    flag = 1;
+                    break;
                 }
 
-                else
+                confrontoCiclo = confrontaMintermine(arrayNuovo->minterms[k], arrayOriginale->minterms[i]);
+
+                if (!strcmp(arrayOriginale->minterms[i], arrayNuovo->minterms[k]))
                 {
+                    flag = 1;
+                }
+                if (strcmp("no", confrontoCiclo))
 
-                    flag = 0;
-                    confrontoCiclo = confrontaMintermine(arrayNuovo->minterms[k], arrayOriginale->minterms[i + c]);
-
-                    for (k = 0; k < arrayNuovo->count; k++)
-                    {
-
-                        if (!strcmp(arrayOriginale->minterms[i + c], arrayNuovo->minterms[k]))
-                        {
-                            flag = 1;
-                        }
-                        if (strcmp("no", confrontoCiclo))
-                        {
-                            flag = 1;
-                        }
-                    }
-                    free(confrontoCiclo);
-
-                    if (flag == 0)
-                    {
-                        strcpy(arrayNuovo->minterms[arrayNuovo->count], arrayOriginale->minterms[i + c]);
-                        arrayNuovo->count++;
-                    }
+                {
+                    strcpy(arrayNuovo->minterms[k], confrontoCiclo);
+                    flag = 1;
+                    break;
                 }
             }
+            free(confrontoCiclo2);
+            if (flag == 0 && strcmp("no", confrontoCiclo))
+            {
+
+                strcpy(arrayNuovo->minterms[j], confrontoCiclo);
+                free(confrontoCiclo);
+            }
+        }
+
+        free(confrontoCiclo);
+
+        if (flag == 0)
+        {
+            strcpy(arrayNuovo->minterms[arrayNuovo->count], arrayOriginale->minterms[i]);
+            arrayNuovo->count++;
         }
     }
 }
