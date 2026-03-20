@@ -11,3 +11,4 @@ typedef struct
 // Funzioni
 void nuovaLista(ListaMinterm *l);
 int inserisciMintermine(ListaMinterm *l, const char *minterm);
+char *confrontaMintermine(char *minterm1, char *minterm2);

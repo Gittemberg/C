@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "espansione.h"
 
@@ -40,6 +41,14 @@ int main(int argc, char *argv[])
     {
         printf("%s\n", lista.minterms[i]);
     }
+    /*    char *test1 = "1001";
+       char *test2 = "1001";
+       char *risultato = malloc(50);
+
+       strcpy(risultato, confrontaMintermine(test1, test2));
+       printf("Risultato test:\n");
+
+       printf("%s\n", risultato); */
 
     return 0;
 }

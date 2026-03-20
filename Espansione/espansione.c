@@ -21,3 +21,38 @@ int inserisciMintermine(ListaMinterm *l, const char *minterm)
     l->count++;
     return 1;
 }
+
+char *confrontaMintermine(char *minterm1, char *minterm2)
+{
+    int length, i, counter, j;
+    counter = 0;
+    j = 0;
+
+    length = strlen(minterm1);
+    char *s = malloc(50);
+    for (i = 0; i < length; i++)
+    {
+        if (!(minterm1[i] == minterm2[i]))
+        {
+            counter++;
+            j = i;
+        }
+        if (counter >= 2)
+        {
+            strcpy(s, "non espandibili");
+            return s;
+        }
+    }
+    if (counter == 1)
+    {
+
+        strcpy(s, minterm1);
+        s[j] = '-';
+        return s;
+    }
+    else
+    {
+        strcpy(s, "non espandibili");
+        return s;
+    }
+}
