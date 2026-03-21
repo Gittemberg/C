@@ -22,125 +22,97 @@ int inserisciMintermine(ListaMinterm *l, const char *minterm)
     return 1;
 }
 
-char *confrontaMintermine(char *minterm1, char *minterm2)
+int confrontaMintermine(const char *a, const char *b, char *out)
 {
-    int length, i, counter, j;
-    counter = 0;
-    j = 0;
+    int diff = 0;
+    int len = strlen(a);
 
-    length = strlen(minterm1);
-    char *s = malloc(length + 1);
-    strcpy(s, minterm1);
-    for (i = 0; i < length; i++)
+    for (int i = 0; i < len; i++)
     {
-
-        if (minterm2[i] != '-' && minterm1[i] != '-' && minterm1[i] != minterm2[i])
+        if (a[i] == b[i])
         {
-            counter++;
-            j = i;
+            out[i] = a[i];
         }
-        else if (minterm2[i] == '-')
+        else if (a[i] == '-' || b[i] == '-')
         {
-
-            s[i] = '-';
+            out[i] = '-';
+        }
+        else
+        {
+            diff++;
+            out[i] = '-';
         }
     }
-    if (counter == 1)
-    {
 
-        s[j] = '-';
-        return s;
-    }
-    if (counter == 0)
-    {
-        return s;
-    }
-    else
-    {
-        strcpy(s, "no");
-        return s;
-    }
+    out[len] = '\0';
+
+    return (diff == 1); // 1 = combinabili
 }
-
-void confrontaArray(ListaMinterm *arrayOriginale, ListaMinterm *arrayNuovo)
+int esiste(ListaMinterm *l, const char *term)
 {
-
-    int i, j, k, flag, c;
-    char *confronto = confrontaMintermine(arrayOriginale->minterms[0], arrayOriginale->minterms[1]);
-    if (arrayOriginale->count == 1)
+    for (int i = 0; i < l->count; i++)
     {
-        strcpy(arrayNuovo->minterms[0], arrayOriginale->minterms[0]);
-        arrayNuovo->count++;
-        return;
+        if (strcmp(l->minterms[i], term) == 0)
+            return 1;
     }
-    if (strcmp("no", confronto))
+    return 0;
+}
+void espandiMintermini(ListaMinterm *input, ListaMinterm *output)
+{
+    ListaMinterm corrente = *input;
+    ListaMinterm nuovo;
+
+    char buffer[MAX_TERMS];
+    int cambiato;
+
+    do
     {
-        strcpy(arrayNuovo->minterms[0], confronto);
-        arrayNuovo->count = 1;
-        c = 1;
-    }
-    else
-    {
-        strcpy(arrayNuovo->minterms[0], arrayOriginale->minterms[0]);
-        strcpy(arrayNuovo->minterms[1], arrayOriginale->minterms[1]);
-        arrayNuovo->count = 2;
-        c = 2;
-    }
-    free(confronto);
-    char *confrontoCiclo;
-    char *confrontoCiclo2;
+        nuovo.count = 0;
+        cambiato = 0;
 
-    k = 0;
-
-    for (i = 2; i < arrayOriginale->count; i++)
-    {
-
-        for (j = 0; j < arrayNuovo->count; j++)
-
+        for (int i = 0; i < corrente.count; i++)
         {
-            confrontoCiclo = confrontaMintermine(arrayNuovo->minterms[j], arrayOriginale->minterms[i]);
-
-            for (k = 0; k < arrayNuovo->count; k++)
+            for (int j = i + 1; j < corrente.count; j++)
             {
-
-                flag = 0;
-
-                confrontoCiclo2 = confrontaMintermine(arrayNuovo->minterms[j], arrayNuovo->minterms[k]);
-                if (!strcmp("no", confrontoCiclo2))
+                if (confrontaMintermine(corrente.minterms[i],
+                                        corrente.minterms[j],
+                                        buffer))
                 {
-                    flag = 1;
-                    break;
+                    if (!esiste(&nuovo, buffer))
+                    {
+                        strcpy(nuovo.minterms[nuovo.count++], buffer);
+                    }
+                    cambiato = 1;
                 }
-
-                confrontoCiclo = confrontaMintermine(arrayNuovo->minterms[k], arrayOriginale->minterms[i]);
-
-                if (!strcmp(arrayOriginale->minterms[i], arrayNuovo->minterms[k]))
-                {
-                    flag = 1;
-                }
-                if (strcmp("no", confrontoCiclo))
-
-                {
-                    strcpy(arrayNuovo->minterms[k], confrontoCiclo);
-                    flag = 1;
-                    break;
-                }
-            }
-            free(confrontoCiclo2);
-            if (flag == 0 && strcmp("no", confrontoCiclo))
-            {
-
-                strcpy(arrayNuovo->minterms[j], confrontoCiclo);
-                free(confrontoCiclo);
             }
         }
 
-        free(confrontoCiclo);
-
-        if (flag == 0)
+        // aggiungi quelli non combinati
+        for (int i = 0; i < corrente.count; i++)
         {
-            strcpy(arrayNuovo->minterms[arrayNuovo->count], arrayOriginale->minterms[i]);
-            arrayNuovo->count++;
+            int combinato = 0;
+
+            for (int j = 0; j < corrente.count; j++)
+            {
+                if (i != j &&
+                    confrontaMintermine(corrente.minterms[i],
+                                        corrente.minterms[j],
+                                        buffer))
+                {
+                    combinato = 1;
+                    break;
+                }
+            }
+
+            if (!combinato && !esiste(&nuovo, corrente.minterms[i]))
+            {
+                strcpy(nuovo.minterms[nuovo.count++], corrente.minterms[i]);
+            }
         }
-    }
+
+        corrente = nuovo;
+
+    } while (cambiato);
+
+    *output = corrente;
 }

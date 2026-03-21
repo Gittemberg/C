@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
          printf("%s\n", risultato);
     */
 
-    confrontaArray(&lista, &lista2);
+    espandiMintermini(&lista, &lista2);
     printf("stampa lista 2\n");
     for (int i = 0; i < lista2.count; i++)
     {
