@@ -1,5 +1,5 @@
 #define MAX_TERMS 100
-#define MAX_BITS 4
+#define MAX_BITS 5
 
 // Array di mintermini come stringhe
 typedef struct
