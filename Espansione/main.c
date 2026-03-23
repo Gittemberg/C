@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
 
     ListaMinterm lista;
     nuovaLista(&lista);
-    ListaMinterm lista2;
-    nuovaLista(&lista2);
+    ListaMinterm listaEspansa;
+    nuovaLista(&listaEspansa);
 
-    char bitStr[MAX_BITS + 2]; // 4 bit + spazio + '\0'
+    char bitStr[MAX_BITS + 2]; // n bit + spazio + '\0'
     int flag;
 
     // Legge il file riga per riga
@@ -31,7 +31,8 @@ int main(int argc, char *argv[])
     {
         if (flag == 1)
         {
-            inserisciMintermine(&lista, bitStr);
+            if (!inserisciMintermine(&lista, bitStr))
+                return 1;
         }
     }
 
@@ -56,11 +57,11 @@ int main(int argc, char *argv[])
          printf("%s\n", risultato);
     */
 
-    espandiMintermini(&lista, &lista2);
-    printf("stampa lista 2\n");
-    for (int i = 0; i < lista2.count; i++)
+    espandiMintermini(&lista, &listaEspansa);
+    printf("Stampa lista espansa:\n");
+    for (int i = 0; i < listaEspansa.count; i++)
     {
-        printf("%s\n", lista2.minterms[i]);
+        printf("%s\n", listaEspansa.minterms[i]);
     }
     return 0;
 }

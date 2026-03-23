@@ -33,12 +33,12 @@ int confrontaMintermine(const char *a, const char *b, char *out)
         {
             out[i] = a[i];
         }
-        else if (a[i] == '-' || b[i] == '-')
-        {
-            out[i] = '-';
-        }
         else
         {
+            // NON combinare se uno dei due è '-'
+            if (a[i] == '-' || b[i] == '-')
+                return 0;
+
             diff++;
             out[i] = '-';
         }
@@ -46,7 +46,7 @@ int confrontaMintermine(const char *a, const char *b, char *out)
 
     out[len] = '\0';
 
-    return (diff == 1); // 1 = combinabili
+    return (diff == 1);
 }
 int esiste(ListaMinterm *l, const char *term)
 {
